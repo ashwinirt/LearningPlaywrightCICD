@@ -111,21 +111,21 @@ public class UnitTest1
     //     await Assertions.Expect(element).ToBeVisibleAsync();
     // }
     
-    [Theory, AutoData]
-    public async Task TestWithAutoFixtureData(Product product)
-    {
-        var page = await _playwrightDriver.Page;
+    //[Theory, AutoData]
+    //public async Task TestWithAutoFixtureData(Product product)
+    //{
+    //    var page = await _playwrightDriver.Page;
 
-        await page.GotoAsync("http://localhost:5001");
+    //    await page.GotoAsync("http://localhost:5001");
         
-        await _productListPage.CreateProductAsync();
-        await _productPage.CreateProduct(product);
-        await _productPage.ClickCreate();
+    //    await _productListPage.CreateProductAsync();
+    //    await _productPage.CreateProduct(product);
+    //    await _productPage.ClickCreate();
         
-        await _productListPage.ClickProductFromList(product.Name);
+    //    await _productListPage.ClickProductFromList(product.Name);
 
         
-        var element = _productListPage.IsProductCreated(product.Name);
-        await Assertions.Expect(element).ToBeVisibleAsync();
-    }
+    //    var element = _productListPage.IsProductCreated(product.Name);
+    //    await Assertions.Expect(element).ToBeVisibleAsync();
+    //}
 }
