@@ -28,12 +28,17 @@ jobs:
       uses: powershell-devops/powershell-devops@v0.2.0
     - name: Ensure browsers are installed
       run: pwsh ${{ github.workspace }}/EaApplicationTest/bin/Debug/net7.0/playwright.ps1 install --with-deps
-    - uses: isbang/compose-action@v1.4.1
-      with:
-        compose-file: ${{ github.workspace }}/docker-compose.yml
-        services: |
-          ea_api
-          ea_webapp
+    #- uses: isbang/compose-action@v1.4.1
+    #  with:
+    # compose-file: ${{ github.workspace }}/docker-compose.yml
+    # services: |
+    #    ea_api
+     #     ea_webapp
+    - name: Start services
+    # This version supports the new 'docker compose' syntax
+      uses: docker/setup-buildx-action@v3
+    - name: Run Docker Compose
+      run: docker compose -f docker-compose.yml up -d ea_api ea_webapp
     - name: Test
       working-directory: ${{ github.workspace }}/EaApplicationTest
       run: dotnet test --no-build --verbosity normal
